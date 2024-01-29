@@ -1,0 +1,16 @@
+modLoader="javafml"
+loaderVersion="[36,]"
+issueTrackerURL="https://github.com/Darkhax-Minecraft/Shield-Banner-Fix/issues"
+license="ARR"
+
+[[mods]]
+modId="shieldbannerfix"
+updateJSONURL="https://updates.blamejared.com/get?n=shieldbannerfix&gv=1.16.5"
+version="${version}"
+displayName="${mod_name}"
+displayURL="${mod_download}"
+credits="${mod_credits}"
+authors="${mod_authors}"
+description='''
+${mod_description}
+'''
