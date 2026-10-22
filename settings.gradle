@@ -27,5 +27,4 @@ plugins {
 rootProject.name = "ShieldBannerFix"
 include('common')
 include('fabric')
-include('forge')
 include('neoforge')

@@ -44,14 +44,10 @@ def getRequiredProperty(name) {
 
 def getExecOutput(commands) {
 
-    def out = new ByteArrayOutputStream()
-
-    exec {
+    // gradle 9 removed exec(). I *think* this is right
+    return providers.exec {
         commandLine commands
-        standardOutput out
-    }
-
-    return out.toString().trim();
+    }.standardOutput.asText.get().trim();
 }
 
 def getDefaultBoolean(name, defaultEnabled = true) {

@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.2-SNAPSHOT'
+    id 'fabric-loom' version '1.18-SNAPSHOT'
     id 'net.darkhax.curseforgegradle'
     id 'idea'
 }
@@ -39,6 +39,10 @@ loom {
 
 processResources {
 
+    inputs.property('version', project.version)
+    inputs.property('minecraft_version', minecraft_version)
+    inputs.property('fabric_loader_version', fabric_loader_version)
+
     from project(':common').sourceSets.main.resources
 
     def buildProps = project.properties.clone()
@@ -66,7 +70,7 @@ processResources {
     }
 }
 
-tasks.withType(JavaCompile).configureEach {
+tasks.named('compileJava', JavaCompile) {
     source(project(':common').sourceSets.main.allSource)
 }
 
@@ -115,12 +119,11 @@ task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge)
 
     apiToken = findProperty('curse_auth')
 
-    def mainFile = upload(curse_project, file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
+    def mainFile = upload(curse_project, file("${project.buildDir}/libs/${project.base.archivesName.get()}-${version}.jar"))
     mainFile.changelogType = 'markdown'
     mainFile.changelog = project.ext.mod_changelog
-    mainFile.addJavaVersion('Java 17')
+    mainFile.addJavaVersion('Java 21')
     mainFile.addModLoader('Fabric')
-    mainFile.addModLoader('Quilt')
     mainFile.releaseType = 'release'
     mainFile.addGameVersion('Client', 'Server')
 
